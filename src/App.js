@@ -1,12 +1,33 @@
-import { AppRpovider } from "./store/AppContext";
+import * as React from "react";
+
+import Input from "./components/Input";
+
+import { AppProvider, useAppState } from "./store/AppContext";
+
+import {
+  updateSearch,
+  setColors,
+  setSearchField,
+  clearFilter,
+} from "./store/AppActions";
 
 import "./App.css";
 
 function App() {
+  const { state, dispatch } = useAppState();
+
+  const getInputValue = React.useCallback(
+    (value) => {
+      dispatch(updateSearch(value));
+    },
+    [dispatch]
+  );
+
   return (
-    <AppRpovider>
+    <>
       <div className="App"> App loaded</div>
-    </AppRpovider>
+      <Input onInputChange={getInputValue} value={state.search} />
+    </>
   );
 }
 

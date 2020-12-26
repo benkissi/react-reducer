@@ -9,9 +9,9 @@ const INITIAL_STATE = {
     selectionMade: false,
 }
 
-const AppContext = React.createContext()
+const AppContext = React.createContext(INITIAL_STATE)
 
-export const AppRpovider = ({children}) => {
+export const AppProvider = ({children}) => {
     const [state, dispatch] = React.useReducer(reducer, INITIAL_STATE)
     return (
         <AppContext.Provider value={{state, dispatch}}>
